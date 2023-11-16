@@ -1,0 +1,65 @@
+<!-- React version -->
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        function HourToMinute() {
+            const [hours, setMinutes] = React.useState();
+            const onChange = (event) => {
+                setMinutes(event.target.value);
+            };
+            let minuteVal = hours * 60;
+            return (
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input value={hours} id="hours" placeholder="hours" type="number" onChange={onChange}/>
+                    <p><b>You want to convert : {hours}</b></p>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input value={minuteVal} id="minutes" placeholder="minutes" type="number" disabled />
+                </div>
+            );
+        }
+        function InchToCentimeter() {
+            const [inch, setInch] = React.useState();
+            const onChange = (event) => {
+                setInch(event.target.value);
+            };
+            let cent = inch * 2.54;
+            return (
+                <div>
+                    <label htmlFor="inch">Inch</label>
+                    <input value={inch} id="inch" placeholder="inch" type="number" onChange={onChange}/>
+                    <p><b>You want to convert : {inch}</b></p>
+                    <label htmlFor="cent">Centimeter</label>
+                    <input value={cent} id="cent" placeholder="Centimeter" type="number" disabled />
+                </div>
+            );
+        }
+        function App() {
+            const [index, setIndex] = React.useState();
+            const onSelect = (event) => {
+                setIndex(event.target.value);
+            }
+
+            return (
+                <div>
+                    <h1>Unit Converter</h1>
+                    <select value={index} name="convSelection" id="convSelection" onChange={onSelect}>
+                        <option value="nothing" selected>Choose..</option>
+                        <option value="0">Hour To Minute</option>
+                        <option value="1">Inch To Centimeter</option>
+                    </select>
+                    {index === "0" ? <HourToMinute/> : null}
+                    {index === "1" ? <InchToCentimeter/> : null}
+                </div>
+            );
+        }
+        ReactDOM.render(<App/>, root);
+    </script>
+</html>
